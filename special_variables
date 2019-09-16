@@ -1,0 +1,15 @@
+# Result of last command executed:
+echo $?
+# PS1 keeps the prompts string
+# man bash (and search for PROMPTING - using / )
+echo $PS1
+# All params are referred to as $* or $@
+# Number of parameters is $#
+echo "This is \$*: $*"
+echo "This is \$@: $@"
+echo This is $#
+# ${!VAR} does indirect substitution, using the value in VAR as the name of the variabit to retrieve.
+
+ABC=-5
+VAR=ABC
+echo ABC=$ABC, VAR=$VAR, '${!VAR}'=${!VAR}

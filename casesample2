@@ -1,0 +1,23 @@
+
+FN="$1"
+# A single "word" is all that is allowed between case and in so we use quotes around the variable
+# to avoid problems with any balnks in the filename.
+case "$FN" in
+# Leading ( below is optional, so most people leave it off.
+   (*.gif) echo "a gif file"
+	;;
+   *.[Pp][Nn][Gg]) echo "a png file"
+	;;
+# Use | to separate different patters for the same action.
+   *.jpg | *.JPEG) echo "a jpg file"
+	;;
+   *.tif | *.TIFF)  echo "a TIFF file"
+# & below added in BASH 4.0 says: dodn't do anything, just ignore this and continue matching.
+	;;&
+   *.mp3 | *.wav)  echo "a music file"
+# ;& is allowd only in BASH 4.0 or later. ;& will "fall through" to the next action.
+	;&
+   *) printf "File '%s' not supported. \n" "$FN"
+	exit 1;
+	;;
+esac

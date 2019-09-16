@@ -1,0 +1,17 @@
+echo Usage: 'ls -l <filename> | bash readls'
+echo
+# read used to parse ls -l output
+#
+# -rwxrwxr-x. 1 pin pin   116 Aug 24 22:59 secondscript
+
+read PERM LN USR GRP SIZ MON DAY YRTM FILENUM
+
+echo PERM: 	$PERM
+echo LN:	$LN
+echo USR:	$USR
+echo GRP:	$GRP
+echo SIZ:	$SIZ
+echo MON:	$MON
+echo DAY:	$DAY
+echo YRTM:	$YRTM
+echo FILENM:	$FILENUM

@@ -1,0 +1,9 @@
+# read A B C
+# The first will get the first word, B will get the second and C will get the rest
+read A B C << EOF
+read my answer baranie
+EOF
+echo $A
+echo $B
+echo $C
+

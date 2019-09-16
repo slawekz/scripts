@@ -1,0 +1,26 @@
+
+# -rw-rw-r--. 1 pin pin   239 Aug 27 04:17 array
+# read -a will create an array from the input data
+
+while read -a LSOUT
+do
+   DOM=${LSOUT[6]}
+   let CNT[DOM]++
+done
+
+for ((i=0; i<32; i++))
+{
+   printf "%2d  %3d\n" $i "${CNT[i]}"
+}
+# Alternative way with eliminating 0 on output.
+# "${CNT[@]}" is replaced by all the values in the array as separate words. Unset values are not returned here.
+for NM in "${CNT[@]}"
+{
+   printf "%3d\n" ${NM}
+}
+# "${!CNT[@]}" gives indices that are set even if set to zero.
+echo
+for NDX in "${!CNT[@]}"
+{
+   printf "%2d  %3d\n" $NDX ${CNT[NDX]}
+}

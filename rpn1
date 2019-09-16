@@ -1,0 +1,17 @@
+
+#simple rpn calculator - one operand
+# usage: rpn1 number1 number2 operator
+
+if (( $# != 3 ))
+then
+   echo usage: "$0 num num op"
+   exit 1
+fi
+#This way
+ANS=$(( $1 $3 $2 ))
+# or this way
+(( ANS = $1 $3 $2 ))
+# or this way
+let "ANS=$1 $3 $2"
+
+echo $ANS

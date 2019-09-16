@@ -1,0 +1,6 @@
+
+echo "invoked with $# arg($)"
+#echo "1st arg is '$1'"
+echo '1st arg ($1) is "'$1'"'
+echo '2nd arg ($2) is "'$2'"'
+

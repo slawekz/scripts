@@ -1,0 +1,62 @@
+echo
+# Options: -a -c  -t -u user
+# -a - print a QQ
+# -c - print cound
+# -t - print totals
+# -u <user> - only count files for this user
+# -v - be verbose
+#
+# getopts <options> <var>, where <options> has all the options available.
+# We can put redirection of output to std error on any echo (directly) or on case or even do (at the done).
+# getopts sets OPTIND to the next argument to be processed, so shitfting by one less gets rid of all those already seen.
+#
+while getopts "actu:v" FLAG
+do
+	case $FLAG in
+	a) AFLAG=set
+	   ;;
+	c) CFLAG=set
+	   ;;
+	t) TFLAG=1
+	   ;;
+	u) UVAL="$OPTARG"
+	   ;;
+	v) VFLAG=1
+	   ;;
+	*) echo "usage: ${0##*/} [-a] [-c] [-t]"
+	   echo "example: ${0##*/} -ac"
+	   exit 1
+	   ;;
+	esac
+done >&2
+# Let's get rid off all arguements now.
+shift $((OPTIND - 1))
+# read used to parse ls -l output
+#
+# -rwxrwxr-x. 1 pin pin   116 Aug 24 22:59 secondscript
+#
+# -a -c -t
+
+declare -i COUNT=0
+# Pipe is causing that the following statement runs in a sub-shell, so we need to group them together.
+#
+ls -l | { while read PERM LN USR GRP SIZ MON DAY YRTM FILENUM
+do
+   COUNT+=1
+   [[ ! "$FILENUM" ]] && continue
+   if [[ "$UVAL" && "$USR" !=  "$UVAL" ]] ; then continue; fi
+   [[ $VFLAG ]] && echo "file: $FILENUM size: $SIZ"
+# let tells to "do math" on the next word - but only one word. No other arguments are allowed on the line.
+# Use quotes around expression to avoid problems with blanks.
+   let "TOTAL += SIZ"
+# Same thing can be done with grouping arithmetic (( ))
+   (( SUM+=SIZ ))
+# Another way is to use $(( )) syntax
+# Don't use $ on variables arithmetics, unless it is a positional or special variable like $1.
+   ALL=$((ALL+SIZ))
+done
+[[ $CFLAG ]] && echo $COUNT files.
+[[ $TFLAG ]] && echo TOTAL: $TOTAL, SUM: $SUM, ALL: $ALL
+[[ $AFLAG ]] && echo 'a QQ :-)'
+echo done!
+}

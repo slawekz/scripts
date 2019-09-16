@@ -1,0 +1,33 @@
+
+# read about all testes in: man test
+for FN in "$@"
+do
+	if [ ! -e "$FN" ]
+	then
+	   continue
+	fi
+
+	printf "%-15.15s\t" "$FN"
+
+	if [ -d "$FN" ]
+	then
+	   printf "%s\n" directory
+	   continue
+	fi
+
+	if [ -r "$FN" ]
+	then
+	   printf "%s " read
+	fi
+
+	if [ -w "$FN" ]
+	then
+	   printf "%s " write
+	fi
+
+	if [ -x "$FN" ]
+	then
+	   printf "%s " execute
+	fi
+	printf "\n"
+done

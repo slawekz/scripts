@@ -1,0 +1,46 @@
+
+# Associative arrays. Use strings as the index and are available only in bash 4.0 or higher.
+# You must use "declare -A VAR" before bash cna use string as an index, otherwise it tries to convert the string to a number 
+# usually reuslting in 0.
+
+declare -A RA
+RA["cat"]=dom
+RA["dog"]=56
+echo ${RA["cat"]}
+echo ${RA["dog"]}
+echo
+# -rw-rw-r--. 1 pin pin   239 Aug 27 04:17 array
+# # read -a will create an array from the input data
+#
+declare -A CNT
+
+while read -a LSOUT
+do
+    if [[ $LSOUT == 'total' ]]; then continue; fi
+    MON=${LSOUT[5]}
+    let CNT[$MON]++
+done
+
+# Alternative way with eliminating 0 on output.
+# "${CNT[@]}" is replaced by all the values in the array as separate words. Unset values are not returned here.
+for NM in "${CNT[@]}"
+{
+    printf "%3s\n" ${NM}
+}
+# "${!CNT[@]}" gives indices that are set even if set to zero.
+echo
+for NDX in "${!CNT[@]}"
+{
+    printf "%3s  %3d\n" "$NDX" ${CNT["$NDX"]}
+}
+echo
+for NDX in "${!CNT[@]}"
+{
+    printf "%3s  %3d:" "$NDX" ${CNT["$NDX"]}
+    for ((i=0; i<${CNT["$NDX"]}; i++ ))
+    do
+	printf "#"
+    done
+    printf "\n"
+}
+#

@@ -1,0 +1,7 @@
+
+source util.sh
+# The source (or a dot ".") builtin may look for your file in any of the directories in the PATH variable, depending on certain options.
+# Use an absolute (full) pathname to be unambiguous. Any statement inside would be executed.
+
+showargs "$@"
+

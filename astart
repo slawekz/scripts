@@ -1,0 +1,13 @@
+echo
+echo invoke script with '$*'
+./secondscript $*
+echo
+echo invoke script with '"$*"'
+./secondscript "$*"
+echo
+echo invoke script with '$@'
+./secondscript $@
+echo
+echo invoke script with '"$@"'
+./secondscript "$@"
+echo

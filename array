@@ -1,0 +1,11 @@
+
+# Use VAR[index] to assign a value, and use ${VAR[index]} to retrieve it.
+# [] idicates numeric inside, and [] is also used in shell pattern matching.
+
+VAR[5]=123
+NDX=5
+VAR[NDX]=275
+# or
+VAR[$NDX]=275
+#display
+echo ${VAR[NDX]}, ${VAR[5]}

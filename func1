@@ -1,0 +1,22 @@
+
+# By default any variable written in bash is global (even inside a function).
+# declaration local makes avariable local inside a function. It's a good idea.
+# Begining BASH 4.2 "declare -g VAR" makes variable VAR global. Writing "declare" without -g makes it local.
+
+function max ()
+{
+   if (( $1 > MAX ))
+   then
+	MAX=$1
+   fi
+}
+
+declare -i CNT
+while read num
+do
+   let CNT++
+   max $num
+done
+
+printf "largest of %d numbers was: %d\n" $CNT $MAX
+

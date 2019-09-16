@@ -1,0 +1,40 @@
+echo $VAR
+echo of processing command line input
+echo
+for VAR
+do
+   echo $VAR
+done
+echo
+echo Example of processing arbitrary paaramaters
+echo
+for FN in one two "Three pigs" "four monkeys"
+do
+   echo $FN
+done
+# Example of an integer loop
+echo
+echo Example of a intiger loop
+echo
+for ((i=1 ; i<9 ; i++ ))
+do
+  FN="0${i}.txt"
+  echo $FN
+done
+echo
+echo Same using while loop
+echo
+let i=0
+while (( i<9 ))
+do
+  FN="0${i}.txt"
+  echo $FN
+  let i++
+done
+echo
+# While can be used with a command, so the command (or a pipe of commands) retrun true.
+# while ls -l | tail +2 | cut -c2-
+# do
+#   body of the loop
+# done
+

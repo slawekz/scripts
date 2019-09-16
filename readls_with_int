@@ -1,0 +1,24 @@
+echo Usage: 'ls -l * | bash readls'
+echo
+# read used to parse ls -l output
+#
+# -rwxrwxr-x. 1 pin pin   116 Aug 24 22:59 secondscript
+
+declare -i COUNT=0
+
+while read PERM LN USR GRP SIZ MON DAY YRTM FILENUM
+do
+   COUNT+=1
+   echo file: $FILENUM size: $SIZ
+# let tells to "do math" on the next word - but only one word. No other arguments are allowed on the line.
+# Use quotes around expression to avoid problems with blanks.
+   let "TOTAL += SIZ"
+# Same thing can be done with grouping arithmetic (( ))
+   (( SUM+=SIZ ))
+# Another way is to use $(( )) syntax
+# Don't use $ on variables arithmetics, unless it is a positional or special variable like $1.
+   ALL=$((ALL+SIZ))
+done
+echo $COUNT files.
+echo TOTAL: $TOTAL, SUM: $SUM, ALL: $ALL
+

@@ -1,0 +1,31 @@
+PIC=abba
+echo '$PIC'= $PIC
+echo '${PIC}'= ${PIC}
+# These are not regular expressions thou.
+echo
+echo '${PIC%a}'= ${PIC%a}
+echo '${PIC%?}'= ${PIC%?}
+echo '${PIC%c}'= ${PIC%c}
+echo '${PIC%b*}' ${PIC%b*}
+echo '${PIC%%b*}'= ${PIC%%b*}
+echo '${PIC%%b*}tys'= ${PIC%%b*}tys
+echo
+echo '${PIC#a}'= ${PIC#a}
+echo '${PIC#?}'= ${PIC#?}
+echo '${PIC#c}'= ${PIC#c}
+echo '${PIC#*b}' ${PIC#*b}
+echo '${PIC##*b}'= ${PIC##*b}
+echo
+echo '${PIC/bb/taca}'= ${PIC/bb/taca}
+echo '${PIC/bb}'= ${PIC/bb}
+echo now implementation of dirname and basename passed as arguments
+FN=${1##*/}
+DIR=${1%/*}
+echo FN= $FN, DIR= $DIR
+# Substrings :pos:len -> where pos is position starting from 0, and len is the length of the string
+FN=${SHELL:2:3}
+echo '${SHELL:2:3}' ${SHELL:2:3} length ${#FN}
+FN=${SHELL:2:80}
+echo '${SHELL:2:80}' ${SHELL:2:80} length ${#FN}
+FN=${SHELL:80:2}
+echo '${SHELL:80:2}' ${SHELL:80:2} length ${#FN}

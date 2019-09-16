@@ -1,0 +1,17 @@
+
+read -p "Answer yes or no: " ANS
+# A single "word" is all that is allowed between case and in so we use quotes around the variable
+# to avoid problems with any balnks in the filename.
+case "$ANS" in
+   yes) echo "OK"
+	;;
+   [Nn]*) echo "negative"
+	;;
+   Y*) echo "Was is a YES?"
+	;;
+   *)  echo "Catch all triggered"
+	;;
+   maybe) echo "make up your mind"
+	exit 1
+	;;
+esac

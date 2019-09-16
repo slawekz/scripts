@@ -1,0 +1,33 @@
+
+# Different ways of declaring functions
+# Function body is between grouping parameters: {} or
+# () to run in a subshell with implications on which variables can be used or
+# (( )) to indicate mathematics or
+# [[ ]] - with corresponding implications
+#  
+# Functions are normally defined at the begining of file
+
+function f1()
+{
+   echo f1: $0 $1 $2
+}
+
+function f2
+{
+   echo f2: $0 $1 $2
+}
+
+f3( )
+{
+   echo f3: $0 $1 $2
+}
+
+echo test function calls
+f3 321
+f2 par1 123
+f1
+echo $0 $1 $2
+
+# Functions are invoked with parameters like:
+# func par1 par2 
+# Inside function positional parameters can be used: $1, $1, ... (except $0)

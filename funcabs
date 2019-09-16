@@ -1,0 +1,18 @@
+
+function abs ()
+{
+   local VN=$1
+   if (( ${!VN} < 0 ))
+   then
+      let ${VN}=0-${!VN}
+   fi
+}
+
+# main
+for num
+do
+   printf "ABS($num) = "
+   abs num		# We could use "num" to emphasise we pass a variable name not it's value.
+   echo "$num"
+done
+
